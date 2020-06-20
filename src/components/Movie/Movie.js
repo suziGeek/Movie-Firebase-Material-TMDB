@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { store, useStore } from "../../constants/hookstore";
 import { Link } from "react-router-dom";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -73,17 +73,26 @@ const Movie = ({ movie }) => {
   let favorite = movie.title;
   const [open, setOpen] = React.useState(false);
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+  /**Initialize starFill */
+
+  useEffect(() => {
+    if (userFav.includes(movie.title)) {
+      setStarFill(true);
+    } else {
+      setStarFill(false);
+    }
+  }, []);
+
+  if (user) {
+    firebase.auth().onAuthStateChanged(function(user) {
       userId = user.uid;
       userFav = user.favorites;
       //!userFav ? (userFav = "test") : (userFav = user.favorites);
       console.log(userFav);
-    } else {
-      console.log("no user logged in");
-    }
-  });
-
+    });
+  } else {
+    console.log("no user logged in firebase auth");
+  }
   console.log(movie.id);
   console.log("this is movie id");
 
@@ -115,15 +124,16 @@ const Movie = ({ movie }) => {
         favorites: firebase.firestore.FieldValue.arrayRemove(favorite),
       });
   };
+  /*****Modal to let user know to login */
+  // if (!user) {
+  //   console.log("user needs to login");
+  //   setOpen(true);
+  // }
 
-  if (!user) {
-    console.log("user needs to login");
-    setOpen(true);
-  }
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  /****END Modal */
 
   // user && user.favorites.includes(favorite)
   //   ? setStarFill(true)
@@ -142,35 +152,18 @@ const Movie = ({ movie }) => {
             <img className={classes.photo} src={poster} alt={movie.title} />
           </Link>
           <button
-            onClick={userFav.includes(favorite) ? removeFavorite : addFavorite}
+            onClick={
+              user
+                ? userFav.includes(movie.title)
+                  ? removeFavorite
+                  : addFavorite
+                : null
+            }
           >
-            {!starFill ? <StarBorderIcon /> : <StarIcon />}
+            {user ? !starFill ? <StarBorderIcon /> : <StarIcon /> : "Login"}
             {console.log({ starFill })}
             {console.log("userFavorites", { userFav })}
           </button>
-          <Modal
-            aria-labelledby='transition-modal-title'
-            aria-describedby='transition-modal-description'
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-              <div className={classes.paper}>
-                <h2 id='transition-modal-title'>
-                  Favorites List <StarBorderIcon />
-                </h2>
-                <p id='transition-modal-description'>
-                  Login or Create an account to create a favorites list!
-                </p>
-              </div>
-            </Fade>
-          </Modal>
         </GridListTile>
       </div>
     </React.Fragment>
