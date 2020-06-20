@@ -1,0 +1,82 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/codemod": "^4.5.0",
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.9.6",
+    "@sentry/browser": "^5.15.4",
+    "@testing-library/jest-dom": "^5.3.0",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^10.0.1",
+    "babel-plugin-import": "^1.13.0",
+    "camelcase": "^5.3.1",
+    "customize-cra": "^0.9.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "firebase": "^7.13.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "mdi-material-ui": "^6.13.0",
+    "moment": "^2.24.0",
+    "prettier": "^1.19.1",
+    "react": "^16.13.1",
+    "react-app-rewired": "^2.1.5",
+    "react-async": "^10.0.1",
+    "react-dom": "^16.13.1",
+    "react-id-swiper": "^3.0.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "react-swipeable-views": "^0.13.9",
+    "reading-time": "^1.2.0",
+    "source-map-explorer": "^2.4.1",
+    "swiper": "^5.3.7",
+    "typeface-roboto": "0.0.75",
+    "validate.js": "^0.13.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "config": {
+    "title": "My Movie App",
+    "theme": {
+      "primaryColor": "blue",
+      "secondaryColor": "red",
+      "dark": true
+    },
+    "firebase": {
+      "apiKey": "AIzaSyBJHZRI01LDK-aGm_tvfwHLUKVDP8F6uoo",
+      "authDomain": "tmdb-movie-app.firebaseapp.com",
+      "databaseUrl": "https://tmdb-movie-app.firebaseio.com",
+      "projectId": "tmdb-movie-app",
+      "storageBucket": "tmdb-movie-app.appspot.com",
+      "messagingSenderId": "894860019248",
+      "appId": "1:894860019248:web:6bae2e2dce08b006240ff5",
+      "measurementId": "G-995W50NDG2"
+    },
+    "sentry": {
+      "dsn": "https://78536326e6524916b6f44b4ea510b7a4@sentry.io/1846624"
+    }
+  }
+}

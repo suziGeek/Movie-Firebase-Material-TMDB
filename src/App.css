@@ -1,0 +1,295 @@
+body {
+  background: black;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  background-color: black;
+}
+.header {
+  display: flex;
+  color: white;
+  text-align: center;
+  width: 100vw;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+.genre-wrap {
+  display: flex;
+  justify-content: flex-start;
+  background-color: black;
+}
+
+.movie-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80vw;
+}
+
+.App-header {
+  background-color: black;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.detail {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vw;
+  background-color: black;
+  color: white;
+  overflow: hidden;
+}
+
+.innerdetail {
+  justify-content: center;
+  text-align: center;
+  width: 40vw;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .detail {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+  }
+
+  .innerdetail {
+    justify-content: center;
+    text-align: center;
+    width: 40vw;
+  }
+  .innerdetail img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.appbar {
+  background-color: #333;
+}
+
+.spinner {
+  height: 80px;
+  margin: auto;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+/* new css for movie component */
+
+* {
+  box-sizing: border-box;
+}
+
+.App-header h2 {
+  text-decoration: none;
+  margin: 0;
+}
+
+.add-movies {
+  text-align: center;
+}
+
+.add-movies button {
+  font-size: 16px;
+  padding: 8px;
+  margin: 0 10px 30px 10px;
+}
+
+/* this is wherre sizing needs to be dynamic */
+
+.movie {
+  padding: 5px 25px 10px 25px;
+  max-width: 200px;
+  transition: 0.8s ease-in-out;
+}
+
+.movie:hover {
+  max-width: 250px;
+}
+
+/* end dynamic style */
+
+.errorMessage {
+  margin: auto;
+  font-weight: bold;
+  color: rgb(161, 15, 15);
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  align-content: center;
+}
+
+input[type="submit"] {
+  padding: 5px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid black;
+  width: 80px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #282c34;
+  color: antiquewhite;
+}
+
+.search > input[type="text"] {
+  height: 35px;
+  width: 40vw;
+  min-width: 170px;
+  color: antiquewhite;
+  border: 1px solid #7d8494;
+  background-color: #282c34 !important;
+}
+.search button {
+  display: flex;
+  align-content: center;
+  margin: unset;
+  border-radius: unset;
+  line-height: 22px;
+}
+button {
+  background-color: #282c34;
+  color: antiquewhite;
+  border: 1px solid #7d8494;
+  cursor: pointer;
+  padding: 5px;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #7d8494;
+  color: antiquewhite;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 694px) and (max-width: 915px) {
+  .movie {
+    max-width: 33%;
+  }
+}
+
+@media screen and (min-width: 652px) and (max-width: 693px) {
+  .movie {
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 651px) {
+  .movie {
+    max-width: 100%;
+    margin: auto;
+  }
+}
+
+#seewho2 {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  background-color: black;
+  padding: 6px 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease 0s;
+}
+
+#seewho2:active {
+  position: relative;
+  top: 3px;
+  left: 2px;
+}
+
+#seewho2:hover {
+  color: gray;
+  font-weight: bold;
+}
+
+.signin {
+  align-self: flex-end;
+}
+
+/* .app-container {
+    display: flex;
+  } */
+
+.menu-align {
+  text-align: right;
+  padding-top: 10px;
+}
+
+#top-menu {
+  display: inline;
+  padding: 5px;
+}
+
+#top-menu li {
+  display: inline;
+  padding: 5px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: rgb(187, 181, 181);
+  background-image: linear-gradient(to right, #333, #ccc, #333);
+}
