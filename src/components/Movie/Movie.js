@@ -13,28 +13,28 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import StarIcon from "@material-ui/icons/Star";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     height: 50,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   modal: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    padding: theme.spacing(2, 4, 3),
   },
 
   contphot: {
-    margin: "5px 25px 10px 25px"
+    margin: "5px 25px 10px 25px",
   },
   photo: {
     width: 300,
@@ -42,18 +42,18 @@ const useStyles = makeStyles(theme => ({
 
     "&:hover": {
       transform: "scale(0.99)",
-      opacity: 0.5
-    }
+      opacity: 0.5,
+    },
   },
 
   titleBar: {
     background:
       "linear-gradient(to bottom, rgba(0,0,0,0) 0%, " +
-      "rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%)"
+      "rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%)",
   },
   icon: {
-    color: "white"
-  }
+    color: "white",
+  },
 }));
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -70,14 +70,14 @@ const Movie = ({ movie }) => {
   const user = auth.currentUser;
   const [starFill, setStarFill] = React.useState(false);
   let db = firebase.firestore();
-  let favorite = movie.original_title;
+  let favorite = movie.title;
   const [open, setOpen] = React.useState(false);
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       userId = user.uid;
       userFav = user.favorites;
-      !userFav ? (userFav = "test") : (userFav = user.favorites);
+      //!userFav ? (userFav = "test") : (userFav = user.favorites);
       console.log(userFav);
     } else {
       console.log("no user logged in");
@@ -97,28 +97,29 @@ const Movie = ({ movie }) => {
   };
 
   const addFavorite = () => {
-    if (user && !starFill) {
-      setStarFill(true);
-      db.collection("users")
-        .doc(userId)
-        .update({
-          favorites: firebase.firestore.FieldValue.arrayUnion(favorite)
-        });
-    }
-    if (user && starFill) {
-      setStarFill(false);
-      console.log(starFill, "starfil");
-      db.collection("users")
-        .doc(userId)
-        .update({
-          favorites: firebase.firestore.FieldValue.arrayRemove(favorite)
-        });
-    }
-    if (!user) {
-      console.log("user needs to login");
-      setOpen(true);
-    }
+    console.log("add starfill");
+    setStarFill(true);
+    db.collection("users")
+      .doc(userId)
+      .update({
+        favorites: firebase.firestore.FieldValue.arrayUnion(favorite),
+      });
   };
+
+  const removeFavorite = () => {
+    setStarFill(false);
+    console.log("remove starfill");
+    db.collection("users")
+      .doc(userId)
+      .update({
+        favorites: firebase.firestore.FieldValue.arrayRemove(favorite),
+      });
+  };
+
+  if (!user) {
+    console.log("user needs to login");
+    setOpen(true);
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -140,16 +141,12 @@ const Movie = ({ movie }) => {
           <Link to='./MovieDetail' onClick={getMovieId} value={movie.id}>
             <img className={classes.photo} src={poster} alt={movie.title} />
           </Link>
-          <button onClick={addFavorite}>
-            {user ? (
-              userFav.includes(movie.original_title) ? (
-                <StarIcon />
-              ) : (
-                <StarBorderIcon />
-              )
-            ) : (
-              "login"
-            )}
+          <button
+            onClick={userFav.includes(favorite) ? removeFavorite : addFavorite}
+          >
+            {!starFill ? <StarBorderIcon /> : <StarIcon />}
+            {console.log({ starFill })}
+            {console.log("userFavorites", { userFav })}
           </button>
           <Modal
             aria-labelledby='transition-modal-title'
@@ -160,7 +157,7 @@ const Movie = ({ movie }) => {
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
-              timeout: 500
+              timeout: 500,
             }}
           >
             <Fade in={open}>
