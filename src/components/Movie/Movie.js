@@ -152,13 +152,7 @@ const Movie = ({ movie }) => {
             <img className={classes.photo} src={poster} alt={movie.title} />
           </Link>
           <button
-            onClick={
-              user
-                ? userFav.includes(movie.title)
-                  ? removeFavorite
-                  : addFavorite
-                : null
-            }
+            onClick={user ? (starFill ? removeFavorite : addFavorite) : null}
           >
             {user ? !starFill ? <StarBorderIcon /> : <StarIcon /> : "Login"}
             {console.log({ starFill })}
