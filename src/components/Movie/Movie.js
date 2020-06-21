@@ -118,6 +118,7 @@ const Movie = ({ movie }) => {
       .doc(userId)
       .update({
         favorites: firebase.firestore.FieldValue.arrayUnion(favorite),
+        id: firebase.firestore.FieldValue.arrayUnion(movie.id),
       });
   };
 
@@ -128,6 +129,7 @@ const Movie = ({ movie }) => {
       .doc(userId)
       .update({
         favorites: firebase.firestore.FieldValue.arrayRemove(favorite),
+        id: firebase.firestore.FieldValue.arrayRemove(movie.id),
       });
   };
   /*****Modal to let user know to login */
