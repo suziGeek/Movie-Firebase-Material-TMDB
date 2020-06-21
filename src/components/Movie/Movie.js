@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   photo: {
     width: 300,
+
     transition: ".3s ease-in-out",
 
     "&:hover": {
@@ -53,6 +54,11 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: "white",
+  },
+  buttPosition: {
+    top: 0,
+    left: 0,
+    position: "absolute",
   },
 }));
 
@@ -142,22 +148,19 @@ const Movie = ({ movie }) => {
   return (
     <React.Fragment>
       <div className={classes.contphot}>
-        <GridListTile
-          key={movie.id}
-
-          // cols={movie.featured ? 3 : 1}
-          // rows={movie.featured ? 3 : 1}
-        >
+        <GridListTile key={movie.id}>
           <Link to='./MovieDetail' onClick={getMovieId} value={movie.id}>
             <img className={classes.photo} src={poster} alt={movie.title} />
           </Link>
-          <button
-            onClick={user ? (starFill ? removeFavorite : addFavorite) : null}
-          >
-            {user ? !starFill ? <StarBorderIcon /> : <StarIcon /> : "Login"}
-            {console.log({ starFill })}
-            {console.log("userFavorites", { userFav })}
-          </button>
+          <div className={classes.buttPosition}>
+            <button
+              onClick={user ? (starFill ? removeFavorite : addFavorite) : null}
+            >
+              {user ? !starFill ? <StarBorderIcon /> : <StarIcon /> : "Login"}
+              {console.log({ starFill })}
+              {console.log("userFavorites", { userFav })}
+            </button>
+          </div>
         </GridListTile>
       </div>
     </React.Fragment>
