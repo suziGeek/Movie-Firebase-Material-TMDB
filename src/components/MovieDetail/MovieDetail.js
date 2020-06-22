@@ -16,8 +16,8 @@ import firebase from "../../firebase";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345
-  }
+    maxWidth: 345,
+  },
 });
 
 let userId = null;
@@ -30,8 +30,6 @@ export default function MovieDetail(props) {
   const movie_id = MovieId[0];
   const user = auth.currentUser;
   let db = firebase.firestore();
-
-  console.log(userId);
 
   const [data] = useFetch(
     `https://api.themoviedb.org/3/movie/${movie_id}?api_key=dc15dc94ad3132023e29552c1fe96161&language=en-US`
@@ -49,22 +47,20 @@ export default function MovieDetail(props) {
   //**ADD TO FAVORITES
 
   const onCreate = () => {
-    // console.log(favbut, "button state add");
     setFavbut(false);
     db.collection("users")
       .doc(userId)
       .update({
-        favorites: firebase.firestore.FieldValue.arrayUnion(favorite)
+        favorites: firebase.firestore.FieldValue.arrayUnion(favorite),
       });
   };
 
   const onRemove = () => {
-    // console.log(favbut, "button state remove");
     setFavbut(true);
     db.collection("users")
       .doc(userId)
       .update({
-        favorites: firebase.firestore.FieldValue.arrayRemove(favorite)
+        favorites: firebase.firestore.FieldValue.arrayRemove(favorite),
       });
   };
 

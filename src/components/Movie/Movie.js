@@ -94,13 +94,10 @@ const Movie = ({ movie }) => {
       userId = user.uid;
       userFav = user.favorites;
       //!userFav ? (userFav = "test") : (userFav = user.favorites);
-      console.log(userFav);
     });
   } else {
     console.log("no user logged in firebase auth");
   }
-  console.log(movie.id);
-  console.log("this is movie id");
 
   const poster =
     movie.poster === "N/A"
@@ -112,7 +109,6 @@ const Movie = ({ movie }) => {
   };
 
   const addFavorite = () => {
-    console.log("add starfill");
     setStarFill(true);
     db.collection("users")
       .doc(userId)
@@ -124,7 +120,7 @@ const Movie = ({ movie }) => {
 
   const removeFavorite = () => {
     setStarFill(false);
-    console.log("remove starfill");
+
     db.collection("users")
       .doc(userId)
       .update({
@@ -159,8 +155,6 @@ const Movie = ({ movie }) => {
               onClick={user ? (starFill ? removeFavorite : addFavorite) : null}
             >
               {user ? !starFill ? <StarBorderIcon /> : <StarIcon /> : "Login"}
-              {console.log({ starFill })}
-              {console.log("userFavorites", { userFav })}
             </button>
           </div>
         </GridListTile>

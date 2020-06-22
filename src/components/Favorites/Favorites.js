@@ -12,8 +12,6 @@ const Favorites = (props) => {
   let favoritesRef = db.collection("users").doc(userId);
   const [MovieId, movieId] = useStore("");
 
-  console.log(user.uid, "this is fav props");
-
   const onDelete = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -27,7 +25,8 @@ const Favorites = (props) => {
 
   const getMovieId = (e) => {
     const value = e.target.value;
-    movieId(value);
+    MovieId(value);
+    console.log("add to movie id", e);
   };
 
   console.log(favVal);
