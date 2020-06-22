@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { store, useStore } from "../../constants/hookstore";
 // import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import firebase from "../../firebase";
 
@@ -8,6 +10,7 @@ const Favorites = (props) => {
   const userId = firebase.auth().currentUser.uid;
   let db = firebase.firestore();
   let favoritesRef = db.collection("users").doc(userId);
+  const [MovieId, movieId] = useStore("");
 
   console.log(user.uid, "this is fav props");
 
@@ -22,6 +25,11 @@ const Favorites = (props) => {
 
   const favVal = [{ title: user.favorites, id: user.id }];
 
+  const getMovieId = (e) => {
+    const value = e.target.value;
+    movieId(value);
+  };
+
   console.log(favVal);
 
   return (
@@ -30,6 +38,13 @@ const Favorites = (props) => {
         return key.title.map((title, index) => (
           <li>
             <p>
+              <Link
+                to='./MovieDetail'
+                onClick={getMovieId}
+                value={key.id[index]}
+              >
+                {title}
+              </Link>
               <button
                 size='small'
                 color='primary'
@@ -38,7 +53,7 @@ const Favorites = (props) => {
               >
                 {console.log("this is id", key.title[index])}
                 {console.log("this is key", key.id[index])}
-                {key.title[index]}
+                Delete
               </button>
             </p>
           </li>
