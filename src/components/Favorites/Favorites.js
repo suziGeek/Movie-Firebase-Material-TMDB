@@ -27,7 +27,7 @@ const Favorites = (props) => {
   return (
     <ul>
       {favVal.map((key) => {
-        key.title.map((title, index) => (
+        return key.title.map((title, index) => (
           <li>
             <p>
               <button
@@ -38,7 +38,7 @@ const Favorites = (props) => {
               >
                 {console.log("this is id", key.title[index])}
                 {console.log("this is key", key.id[index])}
-                test
+                {key.title[index]}
               </button>
             </p>
           </li>
